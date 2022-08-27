@@ -1,7 +1,7 @@
 import requests
 
 def scheduled_job():
-    base_url = 'https://api.telegram.org/bot2082575294:AAG6pW-7k9bOI6AmgMYqNnINPvG8M6NeKqY/sendMessage?chat_id=-601394167&text={}'.format(
+    base_url = 'https://api.telegram.org/bot5481709060:AAHiCCyL9ZISkf7iXl3w10hyK2Lt049XLfQ/sendMessage?chat_id=-601099314&text={}'.format(
         "Heyo Helo")
     requests.get(base_url)
 
