@@ -21,7 +21,7 @@ def scheduled_job():
     # FOR DISCORD
     webhook = SyncWebhook.from_url(
         "https://discord.com/api/webhooks/1013058619358597270/tbBUf22vy2fIbKo_K_bgIPuD6L57Z7ueWBrbvzXYS96bfWQyKmuE9XV0E3q-5Gjuf6GF")
-    webhook.send(str(month) + " months " + str(day) + " days (" + str(diff) + "days)")
+    webhook.send(str(month) + " months " + str(day) + " days (" + str(day) + " days)")
 
 
 scheduled_job()
