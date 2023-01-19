@@ -10,6 +10,7 @@ def scheduled_job():
     future = datetime.date(2023, 5, 31)
     diff = future - today
     day = diff.days
+    temp = day
     if(day > 30):
         month = int(day/30)
         day = int(day % 30)
@@ -21,7 +22,7 @@ def scheduled_job():
     # FOR DISCORD
     webhook = SyncWebhook.from_url(
         "https://discord.com/api/webhooks/1013058619358597270/tbBUf22vy2fIbKo_K_bgIPuD6L57Z7ueWBrbvzXYS96bfWQyKmuE9XV0E3q-5Gjuf6GF")
-    webhook.send(str(month) + " months " + str(day) + " days (" + str(day) + " days)")
+    webhook.send(str(month) + " months " + str(day) + " days (" + str(temp) + " days)")
 
 
 scheduled_job()
