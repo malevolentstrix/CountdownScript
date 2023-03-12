@@ -7,7 +7,7 @@ from discord import SyncWebhook
 def scheduled_job():
 
     today = datetime.date.today()
-    future = datetime.date(2023, 6, 9)
+    future = datetime.date(2023, 6, 10)
     diff = future - today
     day = diff.days
     temp = day
