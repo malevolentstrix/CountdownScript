@@ -25,7 +25,7 @@ def scheduled_job():
 
     # FOR TG
     base_url2 = 'https://api.telegram.org/bot5481709060:AAHiCCyL9ZISkf7iXl3w10hyK2Lt049XLfQ/sendMessage?chat_id=-945979691&text={}'.format(
-        str(month) + " months " + str(day) + " days (**" + str(temp) + "** days) for Placement Day " + str(future))
+        str(month) + " months " + str(day) + " days (" + str(temp) + " days) for Placement Day " + str(future))
     base_url3 = 'https://api.telegram.org/bot5481709060:AAHiCCyL9ZISkf7iXl3w10hyK2Lt049XLfQ/sendMessage?chat_id=-945979691&text={}'.format(
         str(month2) + " months " + str(day2) + " days (" + str(temp2) + " days) for SA Certification Day " + str(future2))
 
