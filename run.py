@@ -26,7 +26,7 @@ def scheduled_job():
     # FOR TG
     base_url2 = 'https://api.telegram.org/bot5481709060:AAHiCCyL9ZISkf7iXl3w10hyK2Lt049XLfQ/sendMessage?chat_id=-945979691&text={}'.format(
         str(month) + " months " + str(day) + " days (" + str(temp) + " days) for Placement Day " + str(future))
-    base_url2 = 'https://api.telegram.org/bot5481709060:AAHiCCyL9ZISkf7iXl3w10hyK2Lt049XLfQ/sendMessage?chat_id=-945979691&text={}'.format(
+    base_url3 = 'https://api.telegram.org/bot5481709060:AAHiCCyL9ZISkf7iXl3w10hyK2Lt049XLfQ/sendMessage?chat_id=-945979691&text={}'.format(
         str(month2) + " months " + str(day2) + " days (" + str(temp2) + " days) for SA Certification Day " + str(future2))
 
     base_url = 'https://api.telegram.org/bot5481709060:AAHiCCyL9ZISkf7iXl3w10hyK2Lt049XLfQ/sendPoll'
@@ -46,6 +46,8 @@ def scheduled_job():
     print(resp)
 
     requests.get(base_url2)
+    requests.get(base_url3)
+
     # FOR DISCORD
     # webhook = SyncWebhook.from_url(
     #     "https://discord.com/api/webhooks/1013058619358597270/tbBUf22vy2fIbKo_K_bgIPuD6L57Z7ueWBrbvzXYS96bfWQyKmuE9XV0E3q-5Gjuf6GF")
