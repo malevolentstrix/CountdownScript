@@ -7,7 +7,7 @@ from discord import SyncWebhook
 def scheduled_job():
 
     today = datetime.date.today()
-    future = datetime.date(2023, 6, 10)
+    future = datetime.date(2023, 12, 10)
     diff = future - today
     day = diff.days
     temp = day
@@ -17,7 +17,7 @@ def scheduled_job():
 
     # FOR TG
     base_url = 'https://api.telegram.org/bot5481709060:AAHiCCyL9ZISkf7iXl3w10hyK2Lt049XLfQ/sendMessage?chat_id=-601099314&text={}'.format(
-        str(month) + " months " + str(day) + " days (" + str(temp) + " days)")
+        str(month) + " months " + str(day) + " days (" + str(temp) + " days) for " + str(future))
 
     requests.get(base_url)
     # FOR DISCORD
