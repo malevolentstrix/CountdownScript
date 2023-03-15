@@ -12,7 +12,7 @@ def scheduled_job():
     future2 = datetime.date(2023, 5, 15)
     diff = future - today
     diff2 = future2 - today
-    day2 = diff.days
+    day2 = diff2.days
     day = diff.days
     temp = day
     temp2 = day2
