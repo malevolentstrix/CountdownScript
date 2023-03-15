@@ -17,13 +17,13 @@ def scheduled_job():
         day = int(day % 30)
 
     # FOR TG
-    base_url2 = 'https://api.telegram.org/bot5481709060:AAHiCCyL9ZISkf7iXl3w10hyK2Lt049XLfQ/sendMessage?chat_id=-601099314&text={}'.format(
+    base_url2 = 'https://api.telegram.org/bot5481709060:AAHiCCyL9ZISkf7iXl3w10hyK2Lt049XLfQ/sendMessage?chat_id=-945979691&text={}'.format(
         str(month) + " months " + str(day) + " days (" + str(temp) + " days) for " + str(future))
 
     base_url = 'https://api.telegram.org/bot5481709060:AAHiCCyL9ZISkf7iXl3w10hyK2Lt049XLfQ/sendPoll'
 
     parameters = {
-        "chat_id" : "-601099314",
+        "chat_id" : "-945979691",
         "question" : "To do",
         # Regular Day
         # "options" : json.dumps(["Solve 10 LeetCode Problems", "Solve 10 Aptitude Problems", "Learn AWS", "Read 10 Pages", "Speak 15 mins", "Solve Rubiks Cube"]),
