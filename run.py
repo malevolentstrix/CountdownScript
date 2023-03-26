@@ -7,12 +7,8 @@ from googleapiclient.errors import HttpError
 from googleapiclient.discovery import build
 today = datetime.date.today()
 
-def writetosheet():
+def authenticate():
 
-    # Replace with the ID of your Google Sheet
-    SPREADSHEET_ID = '1zpqe3bmrhTnmbgjPxHxZbNyGBaPx8OjlCpYIMW8w-qE'
-    # Replace with the name of your sheet
-    SHEET_NAME = 'Daily Status'
 
     # Replace with the path to your service account JSON file
     creds = Credentials.from_service_account_file(
@@ -22,7 +18,16 @@ def writetosheet():
 
     # Authenticate with the Google Sheets API
     service = build('sheets', 'v4', credentials=creds)
+    return service
 
+
+def writetosheet(dailylink):
+    # Replace with the ID of your Google Sheet
+    SPREADSHEET_ID = '1zpqe3bmrhTnmbgjPxHxZbNyGBaPx8OjlCpYIMW8w-qE'
+    # Replace with the name of your sheet
+    SHEET_NAME = 'Daily Status'
+
+    service = authenticate()
     # Get the values of the first sheet
     try:
         result = service.spreadsheets().values().get(spreadsheetId=SPREADSHEET_ID, range=SHEET_NAME).execute()
@@ -41,7 +46,7 @@ def writetosheet():
     # Write the values to the sheet
     if range_name:
         body = {
-            'values': [[str(today-timedelta(days= 1)), "gduyss"]],
+            'values': [[str(today-timedelta(days= 1)), dailylink]],
             'majorDimension': 'ROWS'
         }
         try:
@@ -50,24 +55,44 @@ def writetosheet():
         except HttpError as error:
             print(f"An error occurred: {error}")
 
-            
+def readydaychatid():
+    service = authenticate()
+    result = service.spreadsheets().values().get(spreadsheetId='1zpqe3bmrhTnmbgjPxHxZbNyGBaPx8OjlCpYIMW8w-qE', range='Chat_id!A1').execute()
+    values = result.get('values', [])
+    return values[0][0]
+    #print(str(values[0][0]))
 
+def updateydaychatid(id):
+    service = authenticate()
+    body = {
+        'values': [[id]]
+    }
+    try:
+        result = service.spreadsheets().values().update(spreadsheetId='1zpqe3bmrhTnmbgjPxHxZbNyGBaPx8OjlCpYIMW8w-qE', range='Chat_id!A1', valueInputOption='USER_ENTERED', body=body).execute()
+        print(f"{result.get('updatedCells')} cells updated.")
+    except HttpError as error:
+        print(f"An error occurred: {error}")
+    return result
 
 
 def scheduled_job():
-
-
-
+    chatid_prevday = readydaychatid()
+    print(chatid_prevday)
     # Check yesterday's problem solution
     url = "https://api.telegram.org/bot5481709060:AAHiCCyL9ZISkf7iXl3w10hyK2Lt049XLfQ/getUpdates"
 
     # Make a request to the API
     response = requests.get(url)
-    print(response.content)
+   # print(response.content)
     # Extract the message text from the response
+    problems = ""
     for i in response.json()["result"]:
-        if i["message"]["reply_to_message"]["message_id"] == chatid_prevday:
+        if i["message"]["reply_to_message"]["message_id"] == int(chatid_prevday):
             message_text = i["message"]["text"]
+            print(message_text)
+            problems += message_text
+            problems += ", "
+    writetosheet(problems[0:-2])
 
 
     
@@ -80,13 +105,16 @@ def scheduled_job():
         day = int(day % 30)
 
 
-    base_url2 = 'https://api.telegram.org/bot5481709060:AAHiCCyL9ZISkf7iXl3w10hyK2Lt049XLfQ/sendMessage?chat_id=-945979691&text={}'.format(
+    base_url1 = 'https://api.telegram.org/bot5481709060:AAHiCCyL9ZISkf7iXl3w10hyK2Lt049XLfQ/sendMessage?chat_id=-945979691&text={}'.format(
         str(month) + " months " + str(day) + " days (" + str(temp) + " days) for Placement Day " + str(future))
+    base_url2 = 'https://api.telegram.org/bot5481709060:AAHiCCyL9ZISkf7iXl3w10hyK2Lt049XLfQ/sendMessage?chat_id=-945979691&text={}'.format(
+        str("Please share link to problems you've done today"))
     
-    # chatid = requests.get(base_url2)
-    # print(chatid.content)
+    requests.get(base_url1)
+    chatid = requests.get(base_url2).json()
+    updateydaychatid(chatid["result"]["message_id"])
+    print(chatid["result"]["message_id"])
 
-    writetosheet()
 
 
 
