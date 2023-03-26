@@ -87,11 +87,14 @@ def scheduled_job():
     # Extract the message text from the response
     problems = ""
     for i in response.json()["result"]:
-        if i["message"]["reply_to_message"]["message_id"] == int(chatid_prevday):
-            message_text = i["message"]["text"]
-            print(message_text)
-            problems += message_text
-            problems += ", "
+        try:
+            if i["message"]["reply_to_message"]["message_id"] == int(chatid_prevday):
+                message_text = i["message"]["text"]
+                print(message_text)
+                problems += message_text
+                problems += ", "
+        except KeyError as error:
+            print(f"An error occurred: {error}")
     writetosheet(problems[0:-2])
 
 
