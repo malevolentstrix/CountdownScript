@@ -1,6 +1,6 @@
 on:
   schedule:
-    - cron: "30 04 * * *" #runs at 00:00 UTC everyday
+    - cron: "31 18 * * *" #runs at 00:00 UTC everyday
   push:
     branches: [ master ]
 
@@ -20,6 +20,7 @@ jobs:
           python3 -m pip install --upgrade pip
           pip install requests
           pip install discord
+          pip install --upgrade google-api-python-client
       - name: execute py script # run the run.py to get the latest data
         run: |
           python run.py
