@@ -99,7 +99,7 @@ def scheduled_job():
 
 
     
-    future = datetime.date(2023, 6, 20)
+    future = datetime.date(2023, 6, 25)
     diff = future - today
     day = diff.days
     temp = day
