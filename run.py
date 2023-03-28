@@ -46,7 +46,7 @@ def writetosheet(dailylink1, dailylink2):
     # Write the values to the sheet
     if range_name:
         body = {
-            'values': [[str(today-timedelta(days= 1)), dailylink1, dailylink2]],
+            'values': [[str(today), dailylink1, dailylink2]],
             'majorDimension': 'ROWS'
         }
         try:
