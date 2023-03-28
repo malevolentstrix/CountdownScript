@@ -90,7 +90,7 @@ def scheduled_job():
     for i in response.json()["result"]:
         try:
             if i["message"]["reply_to_message"]["message_id"] == int(chatid_prevday):
-                if i["message"]["from"]["id"]==1887210978:
+                if i["message"]["from"]["id"]==1309152337:
                     message_text1 = i["message"]["text"]
                     print(i["message"]["from"]["id"]==1887210978)
                     problems1 += message_text1
