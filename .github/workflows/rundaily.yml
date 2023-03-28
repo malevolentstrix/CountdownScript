@@ -2,7 +2,7 @@ on:
   schedule:
     - cron: "31 18 * * *" #runs at 00:00 UTC everyday
   push:
-    branches: [ master ]
+    branches: [ master, deployment ]
 
 jobs:
   build:
