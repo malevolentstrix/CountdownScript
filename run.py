@@ -21,7 +21,7 @@ def authenticate():
     return service
 
 
-def writetosheet(dailylink1, dailylink2):
+def writetosheet(dailylink1, dailylink2, dailylink3):
     # Replace with the ID of your Google Sheet
     SPREADSHEET_ID = '1zpqe3bmrhTnmbgjPxHxZbNyGBaPx8OjlCpYIMW8w-qE'
     # Replace with the name of your sheet
@@ -46,7 +46,7 @@ def writetosheet(dailylink1, dailylink2):
     # Write the values to the sheet
     if range_name:
         body = {
-            'values': [[str(today), dailylink1, dailylink2]],
+            'values': [[str(today), dailylink3, dailylink1, dailylink2]],
             'majorDimension': 'ROWS'
         }
         try:
@@ -87,8 +87,9 @@ def scheduled_job():
     # Extract the message text from the response
     problems1 = ""
     problems2 = ""
+    problems3 = ""
     for i in response.json()["result"]:
-        try:
+        try: 
             if i["message"]["reply_to_message"]["message_id"] == int(chatid_prevday):
                 if i["message"]["from"]["id"]==1309152337:
                     message_text1 = i["message"]["text"]
@@ -99,10 +100,14 @@ def scheduled_job():
                     message_text2 = i["message"]["text"]
                     problems2 += message_text2
                     problems2 += ", "
+                if i["message"]["from"]["id"]==985892302:
+                    message_text3 = i["message"]["text"]
+                    problems3 += message_text3
+                    problems3 += ", "
             
         except KeyError as error:
             print(f"An error occurred: {error}")
-    writetosheet(problems1[0:-2], problems2[0:-2])
+    writetosheet(problems1[0:-2], problems2[0:-2], problems3[0:-2])
 
 
     
