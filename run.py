@@ -117,9 +117,9 @@ def scheduled_job():
     temp = day
 
 
-    base_url1 = 'https://api.telegram.org/bot5818771269:AAHlA8PtgxtwIRvVwR8KEDXiPFg5qQEtlvI/sendMessage?chat_id=-817407338&text={}'.format(
+    base_url1 = 'https://api.telegram.org/bot[API]/sendMessage?chat_id=-817407338&text={}'.format(
         str(temp) + " days streak 🔥")
-    base_url2 = 'https://api.telegram.org/bot5818771269:AAHlA8PtgxtwIRvVwR8KEDXiPFg5qQEtlvI/sendMessage?chat_id=-817407338&text={}'.format(
+    base_url2 = 'https://api.telegram.org/[API]/sendMessage?chat_id=-817407338&text={}'.format(
         str("Please share link to problems you've done today"))
     
     requests.get(base_url1)
